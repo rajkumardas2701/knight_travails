@@ -49,3 +49,9 @@
   width: 150px;
   font-size: 20px;
 }
+
+.display-value {
+  text-align: center;
+  font-size: larger;
+  font-weight: bolder;
+}

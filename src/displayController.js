@@ -1,9 +1,10 @@
+import calculateSteps from './calculateSteps';
+
 const displayController = () => {
   // console.log(content);
-
   const displayForm = (mainFrame) => {
     // console.log("Inside display form", mainFrame);
-    const positionForm = document.createElement("div");
+    const positionForm = document.createElement('div');
     positionForm.setAttribute('class', 'position-form');
     mainFrame.appendChild(positionForm);
 
@@ -11,10 +12,9 @@ const displayController = () => {
     form.setAttribute('class', 'main-form');
     positionForm.appendChild(form);
 
-
     const firstInput = document.createElement('div');
     firstInput.setAttribute('class', 'input-section');
-    firstInput.innerText = "Enter start point"
+    firstInput.innerText = 'Enter start point';
     form.appendChild(firstInput);
 
     const input1x = document.createElement('input');
@@ -25,10 +25,9 @@ const displayController = () => {
     input1y.setAttribute('class', 'input-text');
     firstInput.appendChild(input1y);
 
-
     const secondInput = document.createElement('div');
     secondInput.setAttribute('class', 'input-section');
-    secondInput.innerText = "Enter last point"
+    secondInput.innerText = 'Enter end point';
     form.appendChild(secondInput);
 
     const input2x = document.createElement('input');
@@ -39,19 +38,32 @@ const displayController = () => {
     input2y.setAttribute('class', 'input-text');
     secondInput.appendChild(input2y);
 
-
     const calculate = document.createElement('button');
     calculate.setAttribute('class', 'calculate-btn');
-    calculate.innerText = "Calculate Path";
+    calculate.innerText = 'Calculate Path';
     form.appendChild(calculate);
 
-  }
+    const displayVal = document.createElement('p');
+    displayVal.setAttribute('class', 'display-value');
+    positionForm.appendChild(displayVal);
 
-  const displayChessBoard = (mainFrame) => {
-    const chessBoard = document.createElement("div");
-    chessBoard.setAttribute('class', 'chessboard');
-    mainFrame.appendChild(chessBoard);
-  }
+    form.onsubmit = (event) => {
+      event.preventDefault();
+      // console.log(input1x.value);
+      displayVal.innerText = calculateSteps(input1x.value,
+        input1y.value, input2x.value, input2y.value);
+      input1x.value = '';
+      input1y.value = '';
+      input2x.value = '';
+      input2y.value = '';
+    };
+  };
+
+  // const displayChessBoard = (mainFrame) => {
+  //   const chessBoard = document.createElement('div');
+  //   chessBoard.setAttribute('class', 'chessboard');
+  //   mainFrame.appendChild(chessBoard);
+  // };
 
   const displayFrame = () => {
     const content = document.getElementById('content');
@@ -61,12 +73,12 @@ const displayController = () => {
     content.appendChild(mainFrame);
 
     displayForm(mainFrame);
-    displayChessBoard(mainFrame);
-  }
+    // displayChessBoard(mainFrame);
+  };
 
   return {
     displayFrame,
   };
-}
+};
 
 export default displayController;
